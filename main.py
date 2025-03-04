@@ -17,26 +17,40 @@ iconImage = tk.PhotoImage(file=os.getcwd() + "/bin/icon/pyCalcIcon.png")
 root.iconphoto(False, iconImage)
 root.configure(bg="#bdbdbd")
 
-# Configure Current Textbox String
+# Configure global variables
+global currentText, currentEquation
 currentText = ""
 currentEquation = ""
 
+# Configure number box
+numberbox = ttk.Label(root, text="", background="#FFFFFF")
+numberbox.place(x=5, y=5, width=215, height=50)
+
 # Configure Text Operations for Textbox String
-def clear(currentText):
+def updateTextbox():
+    global currentText
+    numberbox.configure(text=currentText)
+
+def clear():
+    global currentText
     currentText = ""
-    print(currentText)
+    updateTextbox()
 
-def addToBox(currentText, x):
+def addToBox(x):
+    global currentText
     currentText = currentText + str(x)
-    print(currentText)
+    updateTextbox()
 
-# Object initializations
-opButtons = operatorButtons.OpBtn(root, ttk)
-nBox = numberBox.NBox(root, ttk, currentText)
-nPad = numberPad.NPad(root, ttk)
+def solveEquation():
+    global currentText
+    updateTextbox()
+    print("Solve for: " + currentText)
+
+opButtons = operatorButtons.OpBtn(root, ttk, addToBox, clear, solveEquation)
+nPad = numberPad.NPad(root, ttk, addToBox)
 
 # Configure UI components
-nBox.returnBox()
+
 opButtons.returnButtons()
 nPad.returnNumberPad()
 
