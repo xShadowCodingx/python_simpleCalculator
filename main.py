@@ -3,7 +3,7 @@
 # Global imports
 import tkinter as tk
 from tkinter import ttk
-import os
+import os, re
 
 # Local module imports
 from bin import operatorButtons, numberBox, numberPad
@@ -41,17 +41,31 @@ def addToBox(x):
     currentText = currentText + str(x)
     updateTextbox()
 
+def separateEquation():
+    global currentText
+    return re.findall(r'\d+|[+\-*/%\u221A²]', currentText)
+
 def solveEquation():
     global currentText
     updateTextbox()
     print("Solve for: " + currentText)
+    print(eval(currentText))
 
+    # Configure keypress event handler
+def handleKeys(event):
+    # print(f"Key Pressed: {event.char}")
+    if event.char == "1" or event.char == "2" or event.char == "3" or event.char == "4" or event.char == "5" or event.char == "6" or event.char == "7" or event.char == "8" or event.char == "9" or event.char == "0":
+        addToBox(event.char)
+
+# Initialize Objects
 opButtons = operatorButtons.OpBtn(root, ttk, addToBox, clear, solveEquation)
 nPad = numberPad.NPad(root, ttk, addToBox)
 
 # Configure UI components
-
 opButtons.returnButtons()
 nPad.returnNumberPad()
+
+# Bind keypresses to functions
+root.bind("<Key>", handleKeys)
 
 root.mainloop()

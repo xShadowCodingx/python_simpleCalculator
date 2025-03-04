@@ -24,7 +24,7 @@ class OpBtn:
         squareRootButton.place(x=170, y=120, height=50, width=50)
         moduloButton = self.ttk.Button(self.root, text="%", command=lambda : self.addToBox("%"))
         moduloButton.place(x=170, y=175, height=50, width=50)
-        squareButton = self.ttk.Button(self.root, text="x²", command=lambda : self.addToBox("x²"))
+        squareButton = self.ttk.Button(self.root, text="x²", command=lambda : self.addToBox("²"))
         squareButton.place(x=170, y=230, height=50, width=50)
         equalsButton = self.ttk.Button(self.root, text="=", command=lambda : self.solveEquation())
         equalsButton.place(x=170, y=285, height=50, width=50)
