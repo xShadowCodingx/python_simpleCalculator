@@ -18,9 +18,14 @@ root.iconphoto(False, iconImage)
 root.configure(bg="#bdbdbd")
 
 # Configure global variables
-global currentText, currentEquation
+global currentText
 currentText = ""
+
+global currentEquation
 currentEquation = ""
+
+global newEquation
+newEquation = False
 
 # Configure number box
 numberbox = ttk.Label(root, text="", background="#FFFFFF")
@@ -37,9 +42,15 @@ def clear():
     updateTextbox()
 
 def addToBox(x):
+    global newEquation
     global currentText
-    currentText = currentText + str(x)
-    updateTextbox()
+    if newEquation == True:
+        currentText = str(x)
+        updateTextbox()
+        newEquation = False
+    else:
+        currentText = currentText + str(x)
+        updateTextbox()
 
 def separateEquation():
     global currentText
@@ -47,15 +58,20 @@ def separateEquation():
 
 def solveEquation():
     global currentText
+    global newEquation
+    solution = "=" + str(eval(currentText))
+    currentText = solution
     updateTextbox()
-    print("Solve for: " + currentText)
-    print(eval(currentText))
+    newEquation = True
 
     # Configure keypress event handler
 def handleKeys(event):
     # print(f"Key Pressed: {event.char}")
     if event.char == "1" or event.char == "2" or event.char == "3" or event.char == "4" or event.char == "5" or event.char == "6" or event.char == "7" or event.char == "8" or event.char == "9" or event.char == "0":
         addToBox(event.char)
+    if event.char == "*" or event.char == "/" or event.char == "-" or event.char == "+" or event.char == ".":
+        addToBox(event.char)
+    # Otherwise it will ignore it
 
 # Initialize Objects
 opButtons = operatorButtons.OpBtn(root, ttk, addToBox, clear, solveEquation)
@@ -67,5 +83,6 @@ nPad.returnNumberPad()
 
 # Bind keypresses to functions
 root.bind("<Key>", handleKeys)
+root.bind("<Return>", lambda event: solveEquation())
 
 root.mainloop()
