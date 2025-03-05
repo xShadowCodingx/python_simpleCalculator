@@ -6,7 +6,7 @@ from tkinter import ttk
 import os, re, math
 
 # Local module imports
-from bin import operatorButtons, numberBox, numberPad
+from bin import operatorButtons, numberPad
 
 # Configure root
 root = tk.Tk()
@@ -28,14 +28,12 @@ global newEquation
 newEquation = False
 
 # Configure number box
-global numberbox
-numberbox = ttk.Label(root, text="", background="#FFFFFF")
+numberbox = ttk.Label(root, text="", background="#FFFFFF", relief="sunken")
 numberbox.place(x=5, y=5, width=215, height=50)
 
 # Configure Text Operations for Textbox String
 def updateTextbox():
     global currentText
-    global numberbox
     numberbox.configure(text=currentText)
 
 def clear():
@@ -48,9 +46,11 @@ def clear():
 def addToBox(x):
     global newEquation
     global currentText
+    global currentEquation
     operators = ["+", "-", "*", "/", "²"]
     if newEquation == True:
-        if x not in operators:
+        if x not in operators and x != "0":
+            currentEquation = str(x)
             currentText = str(x)
             updateTextbox()
             newEquation = False
@@ -64,6 +64,12 @@ def addToBox(x):
             else:
                 currentText = currentText + str(x)
         if len(splitText) > 0:
+            if len(splitText) >= 35:
+                print("Long text")
+            if len(splitText) == 35 and splitText[0] != "." and splitText[1] != "." and splitText[2] != ".":
+                print("Not concatentated")
+            else:
+                print("Short String")
             priorValue = splitText[len(splitText) - 1]
             if x in operators and priorValue in operators:
                 pass
@@ -76,7 +82,6 @@ def addToBox(x):
                     currentText = currentText + str(x)
                 else:
                     currentText = currentText + str(x)
-        # currentText = currentText + str(x)
         updateTextbox()
 
 def separateEquation():
