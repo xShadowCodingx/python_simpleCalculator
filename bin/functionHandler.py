@@ -75,3 +75,14 @@ class funcHandler:
         config.currentText = solution
         funcHandler.updateTextbox()
         config.newEquation = True
+    
+    @staticmethod
+    def handleKeys(event):
+        # print(f"Key Pressed: {event.char}")
+        if event.char == "1" or event.char == "2" or event.char == "3" or event.char == "4" or event.char == "5" or event.char == "6" or event.char == "7" or event.char == "8" or event.char == "9" or event.char == "0":
+            funcHandler.addToBox(event.char)
+        if event.char == "*" or event.char == "/" or event.char == "-" or event.char == "+" or event.char == ".":
+            funcHandler.addToBox(event.char)
+        if event.char == "c" or event.char == "C":
+            funcHandler.clear()
+        # Otherwise it will ignore it
