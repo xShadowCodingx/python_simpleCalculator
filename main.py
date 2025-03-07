@@ -1,12 +1,7 @@
 # Main entry point for the calculator
 
-# Global imports
-import tkinter as tk
-from tkinter import ttk
-import os, re, math
-
 # Local module imports
-from bin import rootFunc, UIcomponents, functionHandler, config, numberbox, root
+from bin import UIcomponents, functionHandler, root
 
 # Configure keypress event handler
 def handleKeys(event):
@@ -20,7 +15,7 @@ def handleKeys(event):
     # Otherwise it will ignore it
 
 # Initialize Objects
-uiComponents = UIcomponents.UIComponents(root.root, ttk, functionHandler.funcHandler.addToBox, functionHandler.funcHandler.clear, functionHandler.funcHandler.solveEquation)
+uiComponents = UIcomponents.UIComponents(root.root, functionHandler.funcHandler.addToBox, functionHandler.funcHandler.clear, functionHandler.funcHandler.solveEquation)
 
 # Configure UI components
 uiComponents.returnOperators()

@@ -5,7 +5,7 @@
 import tkinter as ttk
 
 class UIComponents:
-    def __init__(self, root, ttk, addToBox, clear, solveEquation):
+    def __init__(self, root, addToBox, clear, solveEquation):
         self.root = root
         self.ttk = ttk
         self.addToBox = addToBox
