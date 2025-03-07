@@ -4,7 +4,8 @@
 from bin import UIcomponents, functionHandler, root
 
 # Initialize Objects
-uiComponents = UIcomponents.UIComponents(root.root, functionHandler.funcHandler.addToBox, functionHandler.funcHandler.clear, functionHandler.funcHandler.solveEquation)
+uiComponents = UIcomponents.UIComponents(root.root, functionHandler.funcHandler.addToBox, functionHandler.funcHandler.clear,
+                                        functionHandler.funcHandler.solveEquation, functionHandler.funcHandler.backSpace)
 
 # Configure UI components
 uiComponents.returnOperators()

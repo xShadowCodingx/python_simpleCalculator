@@ -16,7 +16,7 @@ class funcHandler:
     @staticmethod
     def clear():
         config.currentText = ""
-        funcHandler.updateTextbox(numberbox.numberbox)
+        funcHandler.updateTextbox()
     
     @staticmethod
     def addToBox(x):
@@ -77,6 +77,17 @@ class funcHandler:
         config.newEquation = True
     
     @staticmethod
+    def backSpace():
+        textArray = list(config.currentText)
+        if len(textArray) > 0:
+            textArray.pop()
+            newText = "".join(textArray)
+            config.currentText = newText
+            funcHandler.updateTextbox()
+        else:
+            pass
+    
+    @staticmethod
     def handleKeys(event):
         # print(f"Key Pressed: {event.char}")
         if event.char == "1" or event.char == "2" or event.char == "3" or event.char == "4" or event.char == "5" or event.char == "6" or event.char == "7" or event.char == "8" or event.char == "9" or event.char == "0":
@@ -85,4 +96,6 @@ class funcHandler:
             funcHandler.addToBox(event.char)
         if event.char == "c" or event.char == "C":
             funcHandler.clear()
+        if event.keysym == 'BackSpace':
+            funcHandler.backSpace()
         # Otherwise it will ignore it

@@ -5,12 +5,13 @@
 import tkinter as ttk
 
 class UIComponents:
-    def __init__(self, root, addToBox, clear, solveEquation):
+    def __init__(self, root, addToBox, clear, solveEquation, backspace):
         self.root = root
         self.ttk = ttk
         self.addToBox = addToBox
         self.clear = clear
         self.solveEquation = solveEquation
+        self.backspace = backspace
     
     @staticmethod
     def returnNumberBox(root):
@@ -59,3 +60,5 @@ class UIComponents:
         equalsButton.place(x=170, y=285, height=50, width=50)
         clearButton = self.ttk.Button(self.root, text="C", command=lambda : self.clear())
         clearButton.place(x=5, y=285, height=50, width=50)
+        backspaceButton = self.ttk.Button(self.root, text="←", command=lambda : self.backspace())
+        backspaceButton.place(x=115, y=285, height=50, width=50)
